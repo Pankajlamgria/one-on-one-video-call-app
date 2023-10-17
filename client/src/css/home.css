@@ -1,0 +1,139 @@
+*{
+    margin: 0px;
+    padding: 0px;
+
+}
+.homeCover{
+    height:91vh;
+    width: 100%;
+    background-color: rgb(108, 209, 88);
+    color:white;
+    
+}
+.HomeBar{
+    display: flex;
+    align-items: center;
+}
+.Heading{
+    width: 95%;
+    text-align: center;
+    font-size:28px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style:oblique;
+    padding-top:1rem;
+}
+.loginButtonCover{
+    width: 8%;
+}
+.loginButtonCover button{
+    height: 35px;
+    width: 80px;
+    border-radius: 8px;
+    background-color: rgb(108, 209, 88);
+    border: 2px solid white;
+    font-size: 15px;
+    transition: .2s;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px rgb(222, 222, 222);
+}
+.loginButtonCover button:hover{
+    scale: 1.1;
+    color: whitesmoke;
+    text-shadow: 1px 1px 4px rgb(222, 222, 222);
+}
+.cardCover{
+    display: flex;
+    padding-top: 6rem;
+    width: 90%;
+    margin-left: 5%;
+    justify-content: space-around;
+}
+.Card{
+    cursor: pointer;
+    height: 230px;
+    width: 320px;
+    background-color: white;
+    border-radius:2px 2px 15px 15px;
+    transition: .3s;
+}
+.Card:hover{
+    background-color: rgb(212, 212, 212);
+    box-shadow: 1px 1px 4px rgb(255, 255, 255);
+    .cardHeadingimgcover{
+        scale: 1.05;
+    }
+    .cardicon{
+        scale: 1.1;
+    }
+    .cardimg{
+        scale: 1.1;
+    }
+}
+.cardHeading{
+    height: 2.1rem;
+    background-color: rgb(108, 209, 88);
+    opacity: .6;
+}
+.cardHeadingimgcover{
+    transition: .3s;
+    height: 2rem;
+    width: 2rem;
+    overflow: hidden;
+    float: right;
+    margin-right: .5rem;
+}
+.cardHeadingText{
+    float: left;
+    padding-left: 1rem;
+}
+.cardHeadingimg{
+    width: 100%;
+    height: 100%;
+}
+.cardimg{
+    
+    transition: .3s;    
+    margin-left: 2.5%;
+    width: 95%;
+    height: 90%;
+}
+.cardicon{
+    transition: .3s;
+    margin-top: 12%;
+    height: 50%;
+    width: 40%;
+}
+.scheduleCover{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.cardcontent-cover{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.cardcontent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cardText{
+    text-shadow: -2px 2px 4px rgb(247, 171, 48); 
+}
+.scheduleCard{
+    margin-top: 3rem;
+    height: 220px;
+    width: 360px;
+}
+.buttonCover button{
+    margin-top: 1rem;
+    height: 35px;
+    width: 80px;
+    font-size: 17px;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 2px solid white;
+    cursor: pointer;
+}

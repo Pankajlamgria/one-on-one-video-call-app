@@ -5,7 +5,7 @@ const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs");
 const auth=require('../models/auth.js');
 const SECRET="pankajlamgria";
-
+const fetchuser=require("../fetchuser.js");
 router.post("/signin",async(req,res)=>{
     const bodydata=req.body;
     let success=false;
@@ -26,10 +26,66 @@ router.post("/signin",async(req,res)=>{
                     email:bodydata.email,
                     password:strongpswd
                 })
-                // to do from here.
+                const token={
+                    user:{id:createuser.id}
+                }
+                const authtoken=jwt.sign(token,SECRET);
+                console.log(authtoken);
+                success=true;
+                res.json({success,authtoken});
+            }
+            catch(error){
+                res.json({success,error});
             }
         }
     }
+})
+router.post("/login",async(req,res)=>{
+    const bodydata=req.body;
+    let success=false;
+    if(bodydata.email===""|| bodydata.password===""){
+        res.json({success,error:"Incorrect Details."});
+    }
+    else{
+        const finduser=await auth.findOne({email:bodydata.email});
+        if(!finduser){
+            res.json({success,error:"Email does not exist"});
+        }
+        else{
+            try{
+                const result=await bcrypt.compare(bodydata.password,finduser.password);
+                if(result){
+                    const token={
+                        user:{id:finduser.id}
+                    }
+                    const authtoken=jwt.sign(token,SECRET);
+                    success=true;
+                    res.json({success,authtoken});
+                }
+            }
+            catch(error){
+                res.json({success,error:error});
+            }
+
+        }
+    }
+
+})
+router.get("/userdetail",fetchuser,async(req,res)=>{
+    try{
+        const id=req.userid;
+        const userdetails=await auth.findById(id).select("-password");
+        if(userdetails){
+            res.json({success:true,userdetails});
+        }
+        else{
+            res.json({success:false,error:"Server Not responding"});
+        }
+    }
+    catch(error){
+        res.json({success:false,error});
+    }
+    
 })
 
 module.exports=router;

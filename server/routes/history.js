@@ -1,6 +1,8 @@
 const express=require('express');
 const router=express.Router();
+const authschema=require('../models/auth.js');
 const historySchema=require("../models/history");
+const fetchuser = require('../fetchuser');
 
 router.post("/addhistory",async(req,res)=>{
     const bodydata=req.body;
@@ -17,6 +19,21 @@ router.post("/addhistory",async(req,res)=>{
         console.log("new history added.",newhistory);
         success=true;
         res.json({success,newhistory});
+    }
+})
+router.get("/gethistory",fetchuser,async(req,res)=>{
+    try {
+        const userid=req.userid;
+        const userdetail=await authschema.findById(userid).select("-password");
+        if(!userdetail)res.json({success:false,error:"Login first"});
+        else{
+            const callSend=await historySchema.find({sender:userdetail.email});
+            const callReceived=await historySchema.find({receiver:userdetail.email});
+            res.json({success:true,callSend,receivedCall:callReceived});
+
+        }
+    } catch (error) {
+        req.json({success:false,error});
     }
 })
 

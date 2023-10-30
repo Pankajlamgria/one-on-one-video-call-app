@@ -1,9 +1,48 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../css/login.css";
 import camera from "../image/camera.png";
 import hi from "../image/hi.png";
+import videocontext from "../context/Videocontext";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const contextcontent=useContext(videocontext);
+  const navigate=useNavigate();
+  const host="http://localhost:4000";
   const [create, setcreate] = useState(true);
+  const [logindetial,setlogindetail]=useState({email:"",password:""});
+  const [signindetail,setsignindetail]=useState({username:"",email:"",password:""});
+  const handlelongindetailchange=(e)=>{
+    setlogindetail({...logindetial,[e.target.name]:e.target.value});
+  }
+  const handleSigninDetailChange=(e)=>{
+    setsignindetail({...signindetail,[e.target.name]:e.target.value});
+  }
+  const handleLogin=async(e)=>{
+    e.preventDefault();
+    // console.log(logindetial);
+    const response=await fetch(`${host}/api/auth/login`,{
+      method:'POST',
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({email:logindetial.email,password:logindetial.password}),
+    });
+    const logninres=await response.json();
+    if(logninres.success){
+      localStorage.setItem('videotoken',logninres.authtoken);
+      navigate('/');
+      window.location.reload(false);
+    }
+    else{
+      alert(logninres.error);
+    }
+  }
+  const handleSignin=(e)=>{
+    e.preventDefault();
+    console.log(signindetail);
+  }
+
+
   const handletoogleform=(e)=>{
     if(create) setcreate(false);
     else setcreate(true);
@@ -30,44 +69,44 @@ const Login = () => {
           <div className="loginContent">
           <form id="loginForm" style={{ display: create ? "none" : "block" }}>
               <div className="inputcover">
-                <label className="formlabel" for="email">
+                <label className="formlabel" htmlFor="loginemail">
                   Email
                 </label>
-                <input type="email" className="" id="email" />
+                <input type="email" className="" id="loginemail" name="email" onChange={handlelongindetailchange} />
               </div>
               <div className="inputcover">
-                <label className="formlabel" for="password">
+                <label className="formlabel" htmlFor="loginpassword">
                   Password
                 </label>
-                <input type="password" className="" id="password" />
+                <input type="password" className="" id="loginpassword" name="password" onChange={handlelongindetailchange}/>
               </div>
               <div className="buttonCover">
-                <button>Login</button>
+                <button onClick={handleLogin}>Login</button>
               </div>
             </form>
 
 
             <form id="signinForm"  style={{ display: create ? "block" : "none" }}>
               <div className="inputcover">
-                <label className="formlabel" for="username">
+                <label className="formlabel" htmlFor="username">
                   Username
                 </label>
-                <input type="text" className="" id="username" />
+                <input type="text" className="" id="username" name="username" onChange={handleSigninDetailChange} />
               </div>
               <div className="inputcover">
-                <label className="formlabel" for="email">
+                <label className="formlabel" htmlFor="email">
                   Email
                 </label>
-                <input type="email" className="" id="email" />
+                <input type="email" className="" id="email" name="email" onChange={handleSigninDetailChange}/>
               </div>
               <div className="inputcover">
-                <label className="formlabel" for="password">
+                <label className="formlabel" htmlFor="password">
                   Password
                 </label>
-                <input type="password" className="" id="password" />
+                <input type="password" className="" id="password" name="password" onChange={handleSigninDetailChange}/>
               </div>
               <div className="buttonCover">
-                <button>Submit</button>
+                <button onClick={handleSignin}>Signin</button>
               </div>
             </form>
           </div>

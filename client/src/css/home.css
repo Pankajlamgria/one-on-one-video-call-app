@@ -43,15 +43,15 @@
 }
 .cardCover{
     display: flex;
-    padding-top: 6rem;
+    padding-top: 11rem;
     width: 90%;
     margin-left: 5%;
     justify-content: space-around;
 }
 .Card{
     cursor: pointer;
-    height: 230px;
-    width: 320px;
+    height: 290px;
+    width: 340px;
     background-color: white;
     border-radius:2px 2px 15px 15px;
     transition: .3s;

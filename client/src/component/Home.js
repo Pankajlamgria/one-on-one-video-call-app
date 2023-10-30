@@ -5,7 +5,13 @@ import createRoom from "../image/projectvideocall2img.png";
 import schedule from "../image/schedule.png";
 import clock from "../image/clock.png";
 import historyimg from "../image/history.png";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate=useNavigate();
+  const handleHistoryShow=()=>{
+    console.log("clicked");
+    navigate('/history');
+  }
   return (
     <div>
       <div className="homeCover">
@@ -21,9 +27,9 @@ const Home = () => {
             <img className="cardimg" src={createRoom} alt="room"/>
           </div>
 
-          <div className="Card historyCard">
+          <div className="Card historyCard" onClick={handleHistoryShow}>
             <div className="cardHeading">
-            <h3 className="cardHeadingText">History</h3>
+            <h3 className="cardHeadingText" >History</h3>
               <div className="cardHeadingimgcover">
               </div>
             </div>
@@ -44,12 +50,6 @@ const Home = () => {
                 <h3>"Let's craft an appointment for a powerful rendezvous!"</h3>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="scheduleCover">
-          <div className="Card scheduleCard">
-            <div className="cardHeading"></div>
-            
           </div>
         </div>
       </div>

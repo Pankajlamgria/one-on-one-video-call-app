@@ -9,8 +9,10 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate=useNavigate();
   const handleHistoryShow=()=>{
-    console.log("clicked");
     navigate('/history');
+  }
+  const handletoschedule=()=>{
+    navigate('/schedulemeating');
   }
   return (
     <div>
@@ -43,7 +45,7 @@ const Home = () => {
                 <img className="cardHeadingimg" src={clock} alt="clockimg"/>
               </div>
             </div>
-            <div className="cardcontent">
+            <div className="cardcontent" onClick={handletoschedule}>
               <img className="cardicon" src={schedule} alt="schedule" />
               <div className="cardText">
                 {" "}

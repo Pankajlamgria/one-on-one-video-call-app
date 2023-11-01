@@ -66,7 +66,6 @@ router.post("/login",async(req,res)=>{
             catch(error){
                 res.json({success,error:error});
             }
-
         }
     }
 

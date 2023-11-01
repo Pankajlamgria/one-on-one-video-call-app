@@ -1,4 +1,16 @@
 .HomeBar{
     background-color: rgb(125, 213, 107);
+    position: fixed;
+    width: 100%;
     opacity: .9;
+}
+.usericonStyle{
+    height: 100%;
+    width: 100%;
+}
+#appname{       
+    /* background-color: pink; */
+    cursor: pointer;
+    color: white;
+    font-family:cursive;
 }

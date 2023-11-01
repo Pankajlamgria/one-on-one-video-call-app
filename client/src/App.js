@@ -5,6 +5,7 @@ import Login from "./component/Login.js";
 import Navbar from "./component/Navbar";
 import History from "./component/History";
 import VideoState from "./context/VideoState";
+import Schedule from "./component/Schedule";
 function App() {
   return (
     <VideoState>
@@ -14,6 +15,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/history" element={<History />} />
+          <Route path="/schedulemeating" element={<Schedule  />} />
+
         </Routes>
       </Router>
     </VideoState>

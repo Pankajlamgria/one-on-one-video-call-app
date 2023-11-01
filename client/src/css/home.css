@@ -4,7 +4,8 @@
 
 }
 .homeCover{
-    height:91vh;
+    height:87vh;
+    padding-top: 6rem;
     width: 100%;
     background-color: rgb(108, 209, 88);
     color:white;

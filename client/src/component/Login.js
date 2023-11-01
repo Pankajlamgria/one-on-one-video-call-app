@@ -37,9 +37,25 @@ const Login = () => {
       alert(logninres.error);
     }
   }
-  const handleSignin=(e)=>{
+  const handleSignin=async(e)=>{
     e.preventDefault();
-    console.log(signindetail);
+    const response=await fetch(`${host}/api/auth/signin`,{
+      method:'POST',
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify({username:signindetail.username,email:signindetail.email,password:signindetail.password})
+    });
+    const signinres=await response.json();
+    if(signinres.success){
+      localStorage.setItem('videotoken',signinres.authtoken);
+      navigate('/');
+      window.location.reload(false);
+      alert("Signin Successfull");
+    }
+    else{
+      alert(signinres.error);
+    }
   }
 
 

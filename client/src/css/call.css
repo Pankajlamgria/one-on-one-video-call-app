@@ -9,7 +9,6 @@
     margin-bottom: .7rem;
     border-radius: 8px;
     font-size: 19px;
-    cursor: pointer;
     transition: .2s;
     z-index: 1;
 }

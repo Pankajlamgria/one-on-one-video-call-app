@@ -15,6 +15,11 @@
     border-radius: 8px;
     margin-bottom: 2rem;
 }
+.allmeatingscover{
+    height: 240px;
+    overflow-y: auto;
+    box-shadow: -1px -1px 4px grey;
+}
 .schedulemeating{
     background-color: rgb(96 216 74);
 }
@@ -56,4 +61,14 @@
 }
 .schedulebtncover{
     margin-left: 10%;
+}
+
+.deleteCover{
+    height: 32px;
+    width: 32px;
+}
+.deleteCover img{
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
 }

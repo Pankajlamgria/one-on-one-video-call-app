@@ -14,12 +14,20 @@ const Home = () => {
   const handletoschedule=()=>{
     navigate('/schedulemeating');
   }
+  const handleJoinroom=()=>{
+    if(localStorage.getItem("videotoken")){
+      navigate('/room');
+    }
+    else{
+      navigate('/signin');
+    }
+  }
   return (
     <div>
       <div className="homeCover">
         
         <div className="cardCover">
-          <div className="Card createroomeCard">
+          <div className="Card createroomeCard" onClick={handleJoinroom}>
             <div className="cardHeading">
               <h3 className="cardHeadingText">Create/Join Meating</h3>
               <div className="cardHeadingimgcover">

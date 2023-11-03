@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import videocontext from './Videocontext'
+import io from "socket.io-client";
+const socket=io.connect('http://localhost:4000');
 const VideoState = (props) => {
+  console.log(socket);
   const host="http://localhost:4000";
   const [historyCallSend,sethistoryCallSend]=useState([]);
   const [historyCallReceived,sethistoryCallReceived]=useState([]);
   const [schedulemeating,setschedulemeating]=useState([]);
   const [userdetail,setuserdetail]=useState([]);
+  const [userlist,setuserlist]=useState([]);
   const authtoken=localStorage.getItem('videotoken');
   const getHistory=async()=>{
     const response=await fetch(`${host}/api/history/gethistory`,{
@@ -95,7 +99,6 @@ const VideoState = (props) => {
       }
       else{
         window.location.reload(false);
-        // alert(result.error);
       }
     }
     else{
@@ -103,10 +106,40 @@ const VideoState = (props) => {
     }
 
   }
+  const edituserdetail=async(room,id)=>{
+    const response=await fetch(`${host}/api/auth/editDetails`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+        "authtoken":authtoken,
+      },
+      body:JSON.stringify({socketId:id,room:room})
+    });
+    const result=await response.json();
+    if(!result.success){
+      alert(result.error);
+    }
+  }
+  const roomuserlist=async(room)=>{
+    const response=await fetch(`${host}/api/auth/roomuser/${room}`,{
+        method:"GET",
+        headers:{
+          "Content-Type":"application/json"
+        },
+    });
+    const result=await response.json();
+    if(!result.success){
+      alert(result.error);
+    }
+    else{
+      console.log(result.userlist);
+      setuserlist(result.userlist);
+    }
+  }
   return (
     <videocontext.Provider
     value={{
-      getHistory,historyCallSend,historyCallReceived,getSchedule,schedulemeating,getUserDetail,userdetail,setSchedule,deleteMeating
+      getHistory,historyCallSend,historyCallReceived,getSchedule,schedulemeating,getUserDetail,userdetail,setSchedule,deleteMeating,socket,edituserdetail,userlist,roomuserlist
     }}
     >{props.children}</videocontext.Provider>
   )

@@ -19,7 +19,6 @@ const Login = () => {
   }
   const handleLogin=async(e)=>{
     e.preventDefault();
-    // console.log(logindetial);
     const response=await fetch(`${host}/api/auth/login`,{
       method:'POST',
       headers:{

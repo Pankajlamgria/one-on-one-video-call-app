@@ -6,6 +6,9 @@ import Navbar from "./component/Navbar";
 import History from "./component/History";
 import VideoState from "./context/VideoState";
 import Schedule from "./component/Schedule";
+import Roomform from "./component/Roomform.js";
+import Userinroom from "./component/Userinroom.js";
+import Meetpage from "./component/Meetpage.js";
 function App() {
   return (
     <VideoState>
@@ -16,6 +19,10 @@ function App() {
           <Route path="/signin" element={<Login />} />
           <Route path="/history" element={<History />} />
           <Route path="/schedulemeating" element={<Schedule  />} />
+          <Route path="/room" element={<Roomform  />} />
+          <Route path="/room/:roomid" element={<Userinroom  />} />
+          <Route path="/room/:roomid/live" element={<Meetpage  />} />
+          
 
         </Routes>
       </Router>

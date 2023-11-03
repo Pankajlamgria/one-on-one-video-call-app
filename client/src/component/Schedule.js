@@ -22,9 +22,6 @@ const Schedule = () => {
   }
   useEffect(()=>{
     contextcontent.getSchedule();
-    if(contextcontent.userdetail.length===0){
-      contextcontent.getUserDetail();
-    }
   },[])
   return (
     <div className="scheduleCover">

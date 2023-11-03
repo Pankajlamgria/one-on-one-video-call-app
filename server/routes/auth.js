@@ -24,7 +24,9 @@ router.post("/signin",async(req,res)=>{
                 const createuser=await auth.create({
                     username:bodydata.username,
                     email:bodydata.email,
-                    password:strongpswd
+                    password:strongpswd,
+                    socketId:0,
+                    room:0
                 })
                 const token={
                     user:{id:createuser.id}
@@ -39,6 +41,22 @@ router.post("/signin",async(req,res)=>{
             }
         }
     }
+})
+router.post("/editDetails",fetchuser,async(req,res)=>{
+    const id=req.userid;
+    try {
+        const bodydata=req.body;
+        const newdata={
+            socketId:bodydata.socketId,
+            room:bodydata.room,
+        }
+        const updatedData=await auth.findByIdAndUpdate(id,{$set:newdata});   
+        const newupdatedData=await auth.findById(id);
+        res.json({success:true,newupdatedData});
+    } catch (error) {
+        res.json({success:false,error});
+    }
+
 })
 router.post("/login",async(req,res)=>{
     const bodydata=req.body;
@@ -84,7 +102,21 @@ router.get("/userdetail",fetchuser,async(req,res)=>{
     catch(error){
         res.json({success:false,error});
     }
-    
+})
+router.get("/roomuser/:room",async(req,res)=>{
+    try{
+        const userlist=await auth.find({room:req.params.room});
+        // console.log(userlist);
+        if(userlist){
+            res.json({success:true,userlist});
+        }
+        else{
+            res.json({success:false,error:"Server Not responding"});
+        }
+    }
+    catch(error){
+        res.json({success:false,error});
+    }
 })
 
 module.exports=router;

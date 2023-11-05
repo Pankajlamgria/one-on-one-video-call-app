@@ -3,13 +3,15 @@ import videocontext from './Videocontext'
 import io from "socket.io-client";
 const socket=io.connect('http://localhost:4000');
 const VideoState = (props) => {
-  console.log(socket);
+  // console.log(socket);
   const host="http://localhost:4000";
   const [historyCallSend,sethistoryCallSend]=useState([]);
   const [historyCallReceived,sethistoryCallReceived]=useState([]);
   const [schedulemeating,setschedulemeating]=useState([]);
   const [userdetail,setuserdetail]=useState([]);
   const [userlist,setuserlist]=useState([]);
+  const [incommingoffer,setincommingoffer]=useState();
+  const [incommingcall,setincommingcall]=useState("");
   const authtoken=localStorage.getItem('videotoken');
   const getHistory=async()=>{
     const response=await fetch(`${host}/api/history/gethistory`,{
@@ -132,14 +134,14 @@ const VideoState = (props) => {
       alert(result.error);
     }
     else{
-      console.log(result.userlist);
+      // console.log(result.userlist);
       setuserlist(result.userlist);
     }
   }
   return (
     <videocontext.Provider
     value={{
-      getHistory,historyCallSend,historyCallReceived,getSchedule,schedulemeating,getUserDetail,userdetail,setSchedule,deleteMeating,socket,edituserdetail,userlist,roomuserlist
+      getHistory,historyCallSend,historyCallReceived,getSchedule,schedulemeating,getUserDetail,userdetail,setSchedule,deleteMeating,socket,edituserdetail,userlist,roomuserlist,setincommingoffer,incommingoffer,incommingcall,setincommingcall
     }}
     >{props.children}</videocontext.Provider>
   )

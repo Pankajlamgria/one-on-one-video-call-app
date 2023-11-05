@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Usercard = (props) => {
     const navigate=useNavigate();
     const handlecall=()=>{
+      localStorage.setItem("callto",props.user.socketId);
         navigate(`/room/${localStorage.getItem("roomJoined")}/live`);
     }
   return (

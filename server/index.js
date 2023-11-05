@@ -28,13 +28,39 @@ const io=socketIO(server,{
 io.on('connection', (socket)=>{
     console.log('New user connected',socket.id);
     socket.on('join-room',(data)=>{
-        io.to(data.roomname).emit("userjoined");
+        io.to(data.roomname).emit("userjoined room ");
+        console.log("user Joined room",data.roomname)
         socket.join(data.roomname);
         io.to(socket.id).emit("room:joined",{id:socket.id});
     })
+    socket.on('user:call',(data)=>{
+            const {to,offer}=data;
+            console.log("call to:",to);
+            flag=true;
+            io.to(to).emit("incomming:call",{from:socket.id,offer});
+    })
+    socket.on('sendincomingtomeet',(data)=>{
+        const {to,offer}=data;
+        console.log("sending offer to meetpage:",offer);
+        io.to(to).emit("meetincomming:call",{from:socket.id,offer});
+    })
+    socket.on('call:accepted',(data)=>{
+            const {to,ans}=data;
+            console.log("data from call accepted ",to,ans);
+            ansflag=true;
+            io.to(to).emit('call:response',{from:socket.id,ans});
+    })
+    socket.on("peer:nego:needed",(data)=>{
+        const {to,offer}=data;
+        io.to(to).emit("peer:nego:needed:req",{from:socket.id,offer});
+    })
+    socket.on("peer:nego:done",(data)=>{
+        const {to,ans}=data;
+        io.to(to).emit("peer:nego:final",{from:socket.id,ans});
+    })
 
     socket.on('disconnect', ()=>{
-      console.log('disconnected from user');
+      console.log('disconnected from user ',socket.id);
     });
   });
    

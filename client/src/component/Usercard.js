@@ -6,6 +6,7 @@ const Usercard = (props) => {
     const handlecall=()=>{
       localStorage.setItem("callto",props.user.socketId);
         navigate(`/room/${localStorage.getItem("roomJoined")}/live`);
+      localStorage.setItem("calltoemail",props.user.email);
     }
   return (
     <div className='Calls usercard'>

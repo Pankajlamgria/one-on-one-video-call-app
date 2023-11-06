@@ -44,8 +44,10 @@
     height: 40px;
     width: 40px;
     border-radius: 50%;
+    padding: 3px;
 }
 #videotooglebtn{
+    padding: 3px;
     cursor: pointer;
     height: 40px;
     width: 40px;
@@ -55,4 +57,51 @@
     left: 45%;
     z-index: 10;
 
+}
+#endcallbtn{
+    padding: 3px;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: fixed;
+    bottom:1rem;
+    left: 55%;
+    z-index: 10;
+}
+.buttonimg{
+    height: 92%;
+    width: 92%;
+    margin: 2%;
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px green;
+}
+.redcls{
+    box-shadow: 2px 2px 4px rgb(241, 5, 5);
+
+}
+.acceptbtncover{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 8rem;
+    left: 45%;
+}
+.acceptbtncover button{
+    cursor: pointer;
+    width: 220px;
+    border-radius: 8px;
+    padding: 4px;
+    border-color: white;
+    background-color: transparent;
+    font-size: 22px; 
+    color: white;
+    box-shadow: 2px 2px 8px white;  
+    padding-bottom: 1rem;
+}
+.acceptbtnimg{
+    position: relative;
+    top: 8px;
+    height: 35px;
+    width: 42px;
 }

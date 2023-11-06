@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/home.css";
 import createimg from "../image/editicon.png";
 import createRoom from "../image/projectvideocall2img.png";
@@ -22,6 +22,9 @@ const Home = () => {
       navigate('/signin');
     }
   }
+  useEffect(()=>{
+    // window.location.reload();
+  },[])
   return (
     <div>
       <div className="homeCover">

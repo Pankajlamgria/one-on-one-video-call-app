@@ -53,3 +53,28 @@
 .usercard button{
     margin-bottom: 12px;
 }
+.userroomheadingcover{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#refreshbtn{
+    height: 25px;
+    width: 25px;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 2px;
+}
+.userroomheadingcover button{
+    background-color: transparent;
+    height: 29px;
+    width: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+    border-color: rgb(93, 93, 93);
+
+    margin-right: 5rem;
+}

@@ -29,6 +29,7 @@ const Login = () => {
     const logninres=await response.json();
     if(logninres.success){
       localStorage.setItem('videotoken',logninres.authtoken);
+      localStorage.setItem("myemail",logindetial.email);
       navigate('/');
       window.location.reload(false);
     }
@@ -48,6 +49,7 @@ const Login = () => {
     const signinres=await response.json();
     if(signinres.success){
       localStorage.setItem('videotoken',signinres.authtoken);
+      localStorage.setItem('myemail',signindetail.email);
       navigate('/');
       window.location.reload(false);
       alert("Signin Successfull");

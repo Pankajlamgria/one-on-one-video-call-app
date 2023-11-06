@@ -134,14 +134,24 @@ const VideoState = (props) => {
       alert(result.error);
     }
     else{
-      // console.log(result.userlist);
       setuserlist(result.userlist);
     }
+  }
+  const addhistory=async(sen,rec)=>{
+    const response=await fetch(`${host}/api/history/addhistory`,{
+      method:'POST',
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({sender:sen,receiver:rec})
+    });
+    const result=await response.json();
+    if(!result.success) alert(result.error);
   }
   return (
     <videocontext.Provider
     value={{
-      getHistory,historyCallSend,historyCallReceived,getSchedule,schedulemeating,getUserDetail,userdetail,setSchedule,deleteMeating,socket,edituserdetail,userlist,roomuserlist,setincommingoffer,incommingoffer,incommingcall,setincommingcall
+      getHistory,historyCallSend,historyCallReceived,getSchedule,schedulemeating,addhistory,getUserDetail,userdetail,setSchedule,deleteMeating,socket,edituserdetail,userlist,roomuserlist,setincommingoffer,incommingoffer,incommingcall,setincommingcall
     }}
     >{props.children}</videocontext.Provider>
   )

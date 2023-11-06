@@ -27,17 +27,19 @@ const io=socketIO(server,{
 })
 io.on('connection', (socket)=>{
     console.log('New user connected',socket.id);
+    io.to(socket.id).emit('newsocket',{id:socket.id});
     socket.on('join-room',(data)=>{
-        io.to(data.roomname).emit("userjoined room ");
-        console.log("user Joined room",data.roomname)
+        socket.broadcast.to(data.roomname).emit("userjoined",{room:data.roomname});
         socket.join(data.roomname);
+        console.log("user Joined room",data.roomname);
         io.to(socket.id).emit("room:joined",{id:socket.id});
     })
     socket.on('user:call',(data)=>{
-            const {to,offer}=data;
+            const {callfromemail,to,offer}=data;
+            console.log("call from email:",callfromemail);
             console.log("call to:",to);
             flag=true;
-            io.to(to).emit("incomming:call",{from:socket.id,offer});
+            io.to(to).emit("incomming:call",{from:socket.id,offer,callfromemail});
     })
     socket.on('sendincomingtomeet',(data)=>{
         const {to,offer}=data;
@@ -58,9 +60,12 @@ io.on('connection', (socket)=>{
         const {to,ans}=data;
         io.to(to).emit("peer:nego:final",{from:socket.id,ans});
     })
-
+    socket.on("call:canceled",(data)=>{
+        io.to(data.to).emit("callhasbeencanceled");
+    })
     socket.on('disconnect', ()=>{
-      console.log('disconnected from user ',socket.id);
+      console.log('disconnected from user',socket.id);
+    //   io.to(socket.id).emit("removeRoom");
     });
   });
    
